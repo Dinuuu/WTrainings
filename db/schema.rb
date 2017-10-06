@@ -10,9 +10,67 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20171006221916) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "invitations", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "training_session_id"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["training_session_id"], name: "index_invitations_on_training_session_id"
+    t.index ["user_id"], name: "index_invitations_on_user_id"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "trainers", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "training_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["training_id"], name: "index_trainers_on_training_id"
+    t.index ["user_id"], name: "index_trainers_on_user_id"
+  end
+
+  create_table "training_sessions", force: :cascade do |t|
+    t.date "dictation_date"
+    t.bigint "training_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["training_id"], name: "index_training_sessions_on_training_id"
+    t.index ["user_id"], name: "index_training_sessions_on_user_id"
+  end
+
+  create_table "trainings", force: :cascade do |t|
+    t.string "name"
+    t.string "feedback_form"
+    t.string "program"
+    t.string "slides"
+    t.text "objective"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "full_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "invitations", "training_sessions"
+  add_foreign_key "invitations", "users"
+  add_foreign_key "trainers", "trainings"
+  add_foreign_key "trainers", "users"
+  add_foreign_key "training_sessions", "trainings"
+  add_foreign_key "training_sessions", "users"
 end
