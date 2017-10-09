@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :backoffice_administrators, skip: [:passwords, :registrations]
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   root to: 'application#index'
 

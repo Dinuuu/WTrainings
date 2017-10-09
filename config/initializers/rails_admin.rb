@@ -1,5 +1,9 @@
 RailsAdmin.config do |config|
 
+  config.authenticate_with do
+    warden.authenticate! scope: :backoffice_administrator
+  end
+  config.current_user_method(&:current_backoffice_administrator)
   ### Popular gems integration
 
   ## == Devise ==
