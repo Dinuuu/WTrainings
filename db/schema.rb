@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171009205950) do
+ActiveRecord::Schema.define(version: 20171010195003) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,15 +48,6 @@ ActiveRecord::Schema.define(version: 20171009205950) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "trainers", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "training_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["training_id"], name: "index_trainers_on_training_id"
-    t.index ["user_id"], name: "index_trainers_on_user_id"
-  end
-
   create_table "training_sessions", force: :cascade do |t|
     t.date "dictation_date"
     t.bigint "training_id"
@@ -65,6 +56,15 @@ ActiveRecord::Schema.define(version: 20171009205950) do
     t.datetime "updated_at", null: false
     t.index ["training_id"], name: "index_training_sessions_on_training_id"
     t.index ["user_id"], name: "index_training_sessions_on_user_id"
+  end
+
+  create_table "training_users", force: :cascade do |t|
+    t.bigint "training_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["training_id"], name: "index_training_users_on_training_id"
+    t.index ["user_id"], name: "index_training_users_on_user_id"
   end
 
   create_table "trainings", force: :cascade do |t|
@@ -86,8 +86,8 @@ ActiveRecord::Schema.define(version: 20171009205950) do
 
   add_foreign_key "invitations", "training_sessions"
   add_foreign_key "invitations", "users"
-  add_foreign_key "trainers", "trainings"
-  add_foreign_key "trainers", "users"
   add_foreign_key "training_sessions", "trainings"
   add_foreign_key "training_sessions", "users"
+  add_foreign_key "training_users", "trainings"
+  add_foreign_key "training_users", "users"
 end
