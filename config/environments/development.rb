@@ -55,6 +55,16 @@ Rails.application.configure do
   # Devise suggestion
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    user_name: '2253018bc987cd',
+    password: '8dac30d5763294',
+    address: 'smtp.mailtrap.io',
+    domain: 'smtp.mailtrap.io',
+    port: '2525',
+    authentication: :cram_md5
+  }
+
   # Bullet configuration
   config.after_initialize do
     Bullet.enable = true
