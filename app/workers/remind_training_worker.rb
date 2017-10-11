@@ -1,3 +1,5 @@
+require 'sidekiq-scheduler'
+
 class RemindTrainingWorker
   include Sidekiq::Worker
   def perform
