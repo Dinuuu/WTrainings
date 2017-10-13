@@ -6,3 +6,6 @@
   remind_training_worker:
     cron: '0 0 15 * * * America/Argentina/Buenos_Aires'   # Runs Every day at 15:00 BsAs
     class: RemindTrainingWorker
+  send_feedback_worker:
+    cron: '0 0 15 * * * America/Argentina/Buenos_Aires'   # Runs Every day at 15:00 BsAs
+    class: SendFeedbackWorker

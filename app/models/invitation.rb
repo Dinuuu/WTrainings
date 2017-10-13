@@ -5,4 +5,8 @@ class Invitation < ApplicationRecord
   enum status: { pending: 0, accepted: 1, declined: 2, assisted: 3 }
 
   validates :user, :training_session, presence: true
+  validates :user, uniqueness: { scope: :training_session }
+
+  scope :attended, -> { where(attended: true) }
+  scope :not_attended, -> { where(attended: false) }
 end
