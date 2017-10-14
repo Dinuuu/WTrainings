@@ -1,5 +1,7 @@
 RailsAdmin.config do |config|
 
+  Rails.application.eager_load!
+
   config.authenticate_with do
     warden.authenticate! scope: :backoffice_administrator
   end
@@ -44,7 +46,7 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
 
-    ActiveRecord::Base.descendants.each do |imodel|
+    ApplicationRecord.descendants.each do |imodel|
       config.model "#{imodel.name}" do
         list do
           exclude_fields :created_at, :updated_at
