@@ -1,6 +1,6 @@
 class Invitation < ApplicationRecord
   belongs_to :user
-  belongs_to :training_session
+  belongs_to :training_session, inverse_of: :invitations
 
   enum status: { pending: 0, accepted: 1, declined: 2, maybe: 3 }
 
@@ -9,4 +9,8 @@ class Invitation < ApplicationRecord
 
   scope :attended, -> { where(attended: true) }
   scope :not_attended, -> { where(attended: false) }
+
+  def name
+  	"#{user&.name}"
+  end
 end
