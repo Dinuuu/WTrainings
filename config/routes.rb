@@ -3,6 +3,16 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   root to: 'application#index'
 
+  namespace :api do
+    namespace :v1 do
+      resources :charts, only: :none do
+        collection do
+          get :trainings_per_month
+        end
+      end
+    end
+  end
+
   require 'sidekiq/web'
   require 'sidekiq-scheduler/web'
   mount Sidekiq::Web, at: 'sidekiq'

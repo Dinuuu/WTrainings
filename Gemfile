@@ -77,6 +77,10 @@ gem 'recipient_interceptor'
 # Use for DoS attacks
 gem 'rack-attack'
 
+gem 'chartkick'
+
+gem 'groupdate'
+
 gem 'webpacker', '~> 3.0'
 
 group :development do
