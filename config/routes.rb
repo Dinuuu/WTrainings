@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resources :charts, only: :none do
         collection do
           get :trainings_per_month
+          get :trainings_per_type
         end
       end
     end

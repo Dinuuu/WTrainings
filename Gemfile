@@ -79,6 +79,8 @@ gem 'rack-attack'
 
 gem 'chartkick'
 
+gem 'interactor'
+
 gem 'groupdate'
 
 gem 'webpacker', '~> 3.0'

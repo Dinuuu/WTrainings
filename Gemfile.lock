@@ -185,6 +185,7 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (0.8.6)
     ice_nine (0.11.2)
+    interactor (3.1.0)
     ipaddress (0.8.3)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
@@ -514,6 +515,7 @@ DEPENDENCIES
   foreman
   formulaic
   groupdate
+  interactor
   jbuilder (~> 2.5)
   jquery-rails
   launchy
