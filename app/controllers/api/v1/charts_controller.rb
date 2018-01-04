@@ -4,18 +4,17 @@ module Api
       before_action :set_default_month
 
       def trainings_per_month
-        render json: TrainingSession.finished.group_by_month(:dictation_date, format: "%b %Y").count
+        render json: TrainingSessionQuery.new.find(filter_params).group_by_month(:dictation_date, format: "%b %Y").count
       end
 
       def trainings_per_type
-        render json: TrainingSession.joins(:training).finished
-                                    .where('extract(month from training_sessions.dictation_date) = ?',
-                                           Date::MONTHNAMES.find_index(monthly_info[:month]))
-                                    .group('trainings.kind').count
+        render json: TrainingSessionQuery.new.find(filter_params)
+                      .joins(:training)
+                      .group('trainings.kind').count.map { |kind, count| { Training.kinds.key(kind) => count } }
       end
 
       def monthly_info
-        render json: MonthlyInfo.call(monthly_info).result
+        render json: MonthlyInfo.call(filter_params).result
       end
 
       private
@@ -24,8 +23,8 @@ module Api
         params[:month] ||= Time.zone.now.strftime("%B")
       end
 
-      def monthly_info
-        params.permit(:month)
+      def filter_params
+        params.permit(:month, :year)
       end
     end
   end
