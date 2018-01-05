@@ -1,7 +1,7 @@
-class TrainingSessionQuery
+class InvitationsQuery
   attr_reader :relation, :month_number, :year, :user, :after_date
 
-  def initialize(relation=TrainingSession.all)
+  def initialize(relation=Invitation.all)
     @relation = relation
   end
 
@@ -9,9 +9,11 @@ class TrainingSessionQuery
     load_options(options)
     filter_after_date if after_date.present?
     filter_by_month if month_number.present?
-    filter_by_year if year.present?
+    fillter_by_year if year.present?
     filter_by_user if user.present?
-    relation.finished
+    filter_by_finished
+    relation.attended
+
   end
 
   private
@@ -36,7 +38,10 @@ class TrainingSessionQuery
   end
 
   def filter_by_user
-    @relation = relation.joins(:invitations)
-                        .where(invitations: { user_id: user, attended: true })
+    @relation = relation.where(user_id: user)
+  end
+
+  def filter_by_finished
+    @relation = relation.joins(:training_session).where(training_sessions: { status: :finished})
   end
 end

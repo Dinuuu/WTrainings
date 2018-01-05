@@ -1,13 +1,12 @@
-class MonthlyInfo
+class InfoSummary
   include Interactor
 
   def call
-    month_number = Date::MONTHNAMES.find_index(context.month)
-    attended_invitations = MonthlyAttendedInvitationsQuery.new(context.month).find
+    attended_invitations = InvitationsQuery.new.find(context.to_h)
     context.result = {
       woloxers_trained: woloxers_trained(attended_invitations),
       distinct_woloxers_trained: distinct_woloxers_trained(attended_invitations),
-      trainings_given: trainings_given(month_number)
+      trainings_given: trainings_given
     }
   end
 
@@ -21,9 +20,7 @@ class MonthlyInfo
     attended_invitations.pluck(:user_id).uniq.count
   end
 
-  def trainings_given(month_number)
-    TrainingSession.where(status: :finished)
-                   .where('extract(month from dictation_date) = ?', month_number)
-                   .count
+  def trainings_given
+    TrainingSessionQuery.new.find(context.to_h).count
   end
 end
