@@ -19,5 +19,13 @@ class ApplicationController < ActionController::Base
     options.merge(locale: I18n.locale)
   end
 
-  def index; end
+  def index
+    @filter_params = filter_params
+  end
+
+  private
+
+  def filter_params
+    params.permit(:date, :year, :user_id, :after_date)
+  end
 end

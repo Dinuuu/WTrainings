@@ -20,7 +20,7 @@ module Api
       private
 
       def filter_params
-        params.permit(:month, :year, :user_id)
+        params.permit(:date, :year, :user_id, :after_date)
       end
     end
   end
