@@ -1,0 +1,19 @@
+.counters-container {
+	display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  
+	.counter-element {
+    display: flex;
+    flex-direction: column;
+
+    .counter-title {
+      font-size: 32px;
+    }
+
+    .counter-number {
+      font-size: 32px;
+      text-align: center;
+    }
+  }
+}

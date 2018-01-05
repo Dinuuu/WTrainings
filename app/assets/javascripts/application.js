@@ -16,4 +16,5 @@
 //= require bootstrap-sprockets
 //= require Chart.bundle
 //= require chartkick
+//= require charts
 //= require_tree .

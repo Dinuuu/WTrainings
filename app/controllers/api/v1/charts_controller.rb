@@ -13,8 +13,8 @@ module Api
                       .group('trainings.kind').count.transform_keys! { |kind| Training.kinds.key(kind) }
       end
 
-      def monthly_info
-        render json: MonthlyInfo.call(filter_params).result
+      def summary_info
+        render json: InfoSummary.call(filter_params).result
       end
 
       private

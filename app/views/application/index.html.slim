@@ -4,6 +4,21 @@ form action='/' method='get'
   input type='month' name='date' value= @filter_params[:date] 
   input type='submit' value='GET ME THE METRICS!!'
 
+.counters-container
+  .counter-element
+    .counter-title
+      |WOLOXERS TRAINED
+    .counter-number#woloxers-trained
+  .counter-element
+    .counter-title
+      |DISTINCT WOLOXERS TRAINED
+    .counter-number#distinct-woloxers-trained
+  .counter-element
+    .counter-title
+      |TRAININGS DICTATED
+    .counter-number#trainings-given
+
+
 h1
   | Trainings Per Month
 = column_chart trainings_per_month_api_v1_charts_path(@filter_params), xtitle: "Months", ytitle: "# Trainings"
@@ -11,3 +26,4 @@ h1
 h1
   | Trainings per Type
 = pie_chart trainings_per_type_api_v1_charts_path(@filter_params), donut: true
+

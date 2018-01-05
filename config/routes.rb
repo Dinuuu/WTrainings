@@ -9,6 +9,7 @@ Rails.application.routes.draw do
         collection do
           get :trainings_per_month
           get :trainings_per_type
+          get :summary_info
         end
       end
     end
