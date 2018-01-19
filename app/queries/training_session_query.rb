@@ -43,6 +43,7 @@ class TrainingSessionQuery
   end
 
   def filter_by_type
-    @relation = relation.send(type) if Training.t_types.keys.include? type
+    @relation = relation.joins(:training)
+                        .where(trainings: {t_type: Training.t_types[type.to_sym]}) if Training.t_types.keys.include? type
   end
 end
