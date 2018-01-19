@@ -78,9 +78,6 @@ RailsAdmin.config do |config|
     #### INVITATION CONFIGURATION ####
     config.model 'Invitation' do
       parent Training
-      nested do
-        exclude_fields :attended, :status
-      end
     end
 
     #### USER CONFIGURATION ####
