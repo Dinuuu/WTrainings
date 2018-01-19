@@ -10,6 +10,7 @@ Rails.application.routes.draw do
           get :trainings_per_month
           get :trainings_per_type
           get :summary_info
+          get :trainings_attendance
         end
       end
     end

@@ -17,6 +17,11 @@ module Api
         render json: InfoSummary.call(filter_params).result
       end
 
+      def trainings_attendance
+        render json: InvitationsQuery.new.find(filter_params).group(:attended)
+                                     .count.transform_keys! { |attendance| attendance ? 'present' : 'absent' }
+      end
+
       private
 
       def filter_params

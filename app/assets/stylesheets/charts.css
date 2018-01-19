@@ -1,9 +1,9 @@
 .counters-container {
-	display: flex;
+  display: flex;
   flex-direction: row;
   justify-content: space-around;
   
-	.counter-element {
+  .counter-element {
     display: flex;
     flex-direction: column;
 
@@ -15,5 +15,30 @@
       font-size: 32px;
       text-align: center;
     }
+  }
+}
+
+.pie-chart-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  
+  .pie-chart-element {
+    display: flex;
+    flex-direction: column;
+
+    .pie-chart-title {
+      font-size: 32px;
+    }
+  }
+}
+
+.bar-chart-container {
+  display: flex;
+  flex-direction: column;
+
+  .bar-chart-title {
+    text-align: center;
+    font-size: 32px;
   }
 }

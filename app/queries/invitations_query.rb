@@ -13,7 +13,6 @@ class InvitationsQuery
     filter_by_user if user.present?
     filter_by_type if type.present?
     filter_by_finished
-    relation.attended
 
   end
 
