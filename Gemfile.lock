@@ -255,6 +255,9 @@ GEM
     pg (0.21.0)
     pghero (2.0.6)
       activerecord
+    pluck_to_hash (1.0.2)
+      activerecord (>= 4.0.2)
+      activesupport (>= 4.0.2)
     powerpack (0.1.1)
     public_suffix (3.0.0)
     puma (3.10.0)
@@ -526,6 +529,7 @@ DEPENDENCIES
   newrelic_rpm
   pg (~> 0.18)
   pghero
+  pluck_to_hash
   puma (~> 3.0)
   pundit
   rack-attack

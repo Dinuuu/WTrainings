@@ -85,6 +85,8 @@ gem 'groupdate'
 
 gem 'webpacker', '~> 3.0'
 
+gem 'pluck_to_hash'
+
 group :development do
   # Gem to detect N+1 queries
   gem 'better_errors'

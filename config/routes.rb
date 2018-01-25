@@ -13,6 +13,11 @@ Rails.application.routes.draw do
           get :trainings_attendance
         end
       end
+      resources :users, only: :index do
+        member do
+          get :trainings_assisted
+        end
+      end
     end
   end
 

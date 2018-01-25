@@ -9,7 +9,7 @@ class InvitationsQuery
     load_options(options)
     filter_after_date if after_date.present?
     filter_by_month if date.present?
-    fillter_by_year if year.present?
+    filter_by_year if year.present?
     filter_by_user if user.present?
     filter_by_type if type.present?
     filter_by_finished
