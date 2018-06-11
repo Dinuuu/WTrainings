@@ -1,6 +1,7 @@
 class Training < ApplicationRecord
   has_many :training_users
   has_many :trainers, through: :training_users, source: :user
+  has_many :training_sessions
 
   accepts_nested_attributes_for :training_users
 
