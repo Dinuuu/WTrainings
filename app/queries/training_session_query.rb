@@ -1,5 +1,5 @@
 class TrainingSessionQuery
-  attr_reader :relation, :date, :year, :user, :after_date, :type
+  attr_reader :relation, :date, :year, :user, :after_date, :type, :trainer
 
   def initialize(relation=TrainingSession.all)
     @relation = relation
@@ -12,6 +12,7 @@ class TrainingSessionQuery
     filter_by_year if year.present?
     filter_by_user if user.present?
     filter_by_type if type.present?
+    filter_by_trainer if trainer.present?
     relation.finished
   end
 
@@ -22,6 +23,7 @@ class TrainingSessionQuery
     @year = options[:year]
     @user = options[:user_id]
     @after_date = options[:after_date]
+    @trainer = options[:trainer_id]
     @type = options[:type]
   end
 
@@ -40,6 +42,10 @@ class TrainingSessionQuery
   def filter_by_user
     @relation = relation.joins(:invitations)
                         .where(invitations: { user_id: user, attended: true })
+  end
+
+  def filter_by_trainer
+    @relation = relation.where(user_id: trainer)
   end
 
   def filter_by_type
