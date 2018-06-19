@@ -56,6 +56,11 @@ RailsAdmin.config do |config|
 
     #### TRAINING CONFIGURATION ####
     config.model 'Training' do
+      list do
+        exclude_fields :feedback_form, :program, :slides,
+          :objective, :created_at, :updated_at, :training_users,
+          :trainers, :training_sessions
+      end
       create do
         exclude_fields :training_users
       end
