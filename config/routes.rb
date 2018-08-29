@@ -13,6 +13,11 @@ Rails.application.routes.draw do
           get :trainings_attendance
         end
       end
+      resources :user, only: :none do
+        member do
+          get :info
+        end
+      end
     end
   end
 

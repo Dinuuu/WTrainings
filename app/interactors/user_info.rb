@@ -2,10 +2,6 @@ class UserInfo
   include Interactor
 
   def call
-    attended_invitations = InvitationsQuery.new(Invitation.attended).find(context.to_h)
-    not_attended_invitations = InvitationsQuery.new(Invitation.not_attended).find(context.to_h)
-    woloxers_trained = User.find(InvitationsQuery.new(Invitation.where(training_session_id: trainings_given.ids).attended)
-                                        .find(context_without_user).pluck(:user_id).uniq)
     context.result = {
       trainings_assisted: serialize_collection(attended_invitations, ::InvitationSerializer),
       trainings_invited: serialize_collection(not_attended_invitations, ::InvitationSerializer),
@@ -27,4 +23,18 @@ class UserInfo
   def trainings_given
     @trainings_given ||= TrainingSessionQuery.new.find(context_without_user.to_h.merge(trainer_id: context.user_id))
   end
+
+  def attended_invitations
+    @attended_invitations ||= InvitationsQuery.new(Invitation.attended).find(context.to_h)
+  end
+
+  def not_attended_invitations
+    @not_attended_invitations ||= InvitationsQuery.new(Invitation.not_attended).find(context.to_h)
+  end
+
+  def woloxers_trained
+    @woloxers_trained ||= User.find(InvitationsQuery.new(Invitation.where(training_session_id: trainings_given.ids).attended)
+              .find(context_without_user).pluck(:user_id).uniq)
+  end
+
 end
