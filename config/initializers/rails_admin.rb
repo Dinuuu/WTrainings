@@ -69,6 +69,16 @@ RailsAdmin.config do |config|
       end
     end
 
+    #### COUNTRY CONFIGURATION ####
+    config.model 'Country' do
+      create do
+        exclude_fields :training_sessions
+      end
+      edit do
+        exclude_fields :training_sessions
+      end
+    end
+
     #### TRAINING SESSION CONFIGURATION ####
     config.model 'TrainingSession' do
       parent Training

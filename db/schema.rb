@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180619040401) do
+ActiveRecord::Schema.define(version: 20190508180342) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,12 @@ ActiveRecord::Schema.define(version: 20180619040401) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_backoffice_administrators_on_email", unique: true
     t.index ["reset_password_token"], name: "index_backoffice_administrators_on_reset_password_token", unique: true
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "invitations", force: :cascade do |t|
@@ -57,6 +63,8 @@ ActiveRecord::Schema.define(version: 20180619040401) do
     t.datetime "updated_at", null: false
     t.string "time"
     t.integer "status"
+    t.bigint "country_id"
+    t.index ["country_id"], name: "index_training_sessions_on_country_id"
     t.index ["training_id"], name: "index_training_sessions_on_training_id"
     t.index ["user_id"], name: "index_training_sessions_on_user_id"
   end
@@ -92,6 +100,7 @@ ActiveRecord::Schema.define(version: 20180619040401) do
 
   add_foreign_key "invitations", "training_sessions"
   add_foreign_key "invitations", "users"
+  add_foreign_key "training_sessions", "countries"
   add_foreign_key "training_sessions", "trainings"
   add_foreign_key "training_sessions", "users"
   add_foreign_key "training_users", "trainings"
